@@ -19,8 +19,8 @@ days.forEach(day => {
       .then((solution: Solution) => {
         const input = readFile(day);
         console.info(`Solutions for day ${day}`);
-        console.log('    Challenge 1: ', solution.challenge1(input));
-        console.log('    Challenge 2: ', solution.challenge2(input));
+        console.log('    Challenge 1: ', solution.challenge1([...input]));
+        console.log('    Challenge 2: ', solution.challenge2([...input]));
       });
   }
 });
