@@ -1,8 +1,8 @@
 import { readFile } from "./file-reader";
 
 interface Solution {
-  challenge1(input: Array<string>): any;
-  challenge2(input: Array<string>): any;
+  challenge1(input: Array<string>): number;
+  challenge2(input: Array<string>): number;
 }
 
 
