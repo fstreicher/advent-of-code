@@ -19,4 +19,16 @@ export function challenge1(input: Array<string>): number {
 }
 
 // Challenge 2
-export function challenge2(input: Array<string>) { }
+export function challenge2(input: Array<string>): number {
+  const fish = (input.pop() || '').split(',').map(str => parseInt(str, 10));
+  const days = 256;
+  const population = new Array(9).fill(0);
+
+  fish.forEach(age => population[age]++);
+
+  for (let i = 0; i < days; i++) {
+    population[(i + 7) % 9] += population[i % 9];
+  }
+
+  return population.reduce((acc, curr) => acc += curr, 0);
+}
