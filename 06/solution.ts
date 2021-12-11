@@ -26,6 +26,11 @@ export function challenge2(input: Array<string>): number {
 
   fish.forEach(age => population[age]++);
 
+  // we will model a circular shift register, with an additional feedback:
+  //       0123456           78 
+  //   ┌──[       ]─<─(+)───[  ]──┐
+  //   └──────>────────┴─────>────┘
+
   for (let i = 0; i < days; i++) {
     population[(i + 7) % 9] += population[i % 9];
   }
