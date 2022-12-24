@@ -5,19 +5,19 @@ interface Solution {
   challenge2(input: Array<string>): number;
 }
 
+const year = process.argv[2];
+const days = process.argv.slice(3);
 
-const days = process.argv.slice(2);
-
-if (!days.length) {
+if (!year.length && !days.length) {
   console.error('Expected arguments, none received.');
   process.exit(0);
 }
 
 days.forEach(day => {
   if (day && /\d{2}/.test(day)) {
-    import(`./${day}/solution`)
+    import(`./${year}/${day}/solution`)
       .then((solution: Solution) => {
-        const input = readFile(day);
+        const input = readFile(`${year}/${day}`);
         console.info(`Solutions for day ${day}`);
         console.log('    Challenge 1: ', solution.challenge1([...input]));
         console.log('    Challenge 2: ', solution.challenge2([...input]));
