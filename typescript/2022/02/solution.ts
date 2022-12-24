@@ -18,7 +18,7 @@ type RPS_Self = 'X' | 'Y' | 'Z';
  * Z: Win  
  */
 type Outcome = 'X' | 'Y' | 'Z';
-type Strategy = `${RPS_Opponent} ${RPS_Self}`;
+type Strategy = `${RPS_Opponent} ${RPS_Self|Outcome}`;
 
 function getOutcomeScore(opponent: RPS_Opponent, self: RPS_Self): 0 | 3 | 6 {
   // win
@@ -51,7 +51,7 @@ function getShapeScore(self: RPS_Self): 1 | 2 | 3 {
   }
 }
 
-function getShapeForOutome(opponent: RPS_Opponent, outcome: Outcome): RPS_Self {
+function getShapeForOutcome(opponent: RPS_Opponent, outcome: Outcome): RPS_Self {
   switch (outcome) {
     // Loss
     case 'X':
@@ -100,7 +100,7 @@ export function challenge1(input: Array<string>) {
 export function challenge2(input: Array<string>) {
   const scores = input.map((strategy: string) => {
     const [opponent, outcome] = (strategy as Strategy).split(' ') as [RPS_Opponent, Outcome];
-    const self = getShapeForOutome(opponent, outcome);
+    const self = getShapeForOutcome(opponent, outcome);
     return getOutcomeScore(opponent, self) + getShapeScore(self);
   });
   return scores.reduce((acc, curr) => acc += curr, 0);
