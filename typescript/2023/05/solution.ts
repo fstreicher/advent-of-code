@@ -17,42 +17,6 @@ interface AlmanacMap {
   destinationOffset: number;
 }
 
-const exampleInput = [
-  'seeds: 79 14 55 13',
-  '',
-  'seed-to-soil map:',
-  '50 98 2',
-  '52 50 48',
-  '',
-  'soil-to-fertilizer map:',
-  '0 15 37',
-  '37 52 2',
-  '39 0 15',
-  '',
-  'fertilizer-to-water map:',
-  '49 53 8',
-  '0 11 42',
-  '42 0 7',
-  '57 7 4',
-  '',
-  'water-to-light map:',
-  '88 18 7',
-  '18 25 70',
-  '',
-  'light-to-temperature map:',
-  '45 77 23',
-  '81 45 19',
-  '68 64 13',
-  '',
-  'temperature-to-humidity map:',
-  '0 69 1',
-  '1 0 69',
-  '',
-  'humidity-to-location map:',
-  '60 56 37',
-  '56 93 4',
-];
-
 function convertAlmanac(input: Array<string>): Almanac {
   const almanac: Almanac = {
     seeds: [],
@@ -124,27 +88,35 @@ function getLocation(seed: number, almanac: Almanac): number {
 // Challenge 1
 export function challenge1(input: Array<string>) {
   const almanac = convertAlmanac(input);
+  let minLocation = Number.MAX_SAFE_INTEGER;
 
-  return Math.min(...almanac.seeds.map(seed => getLocation(seed, almanac)));
+  almanac.seeds.forEach(seed => {
+    const location = getLocation(seed, almanac);
+    if (location < minLocation) {
+      minLocation = location;
+    }
+  });
+
+  return minLocation;
 }
 
 
 // Challenge 2
 export function challenge2(input: Array<string>) {
-  // input = exampleInput;
-
   const almanac = convertAlmanac(input);
-  const locations: Array<number> = [];
+  let minLocation: number = Number.MAX_SAFE_INTEGER;
 
   for (let i = 0; i < almanac.seeds.length; i += 2) {
     const startSeed = almanac.seeds[i];
     const seedRange = almanac.seeds[i + 1];
 
-    // this works for the example input, but breaks for the real input because the numbers are too big
     for (let seed = startSeed; seed < startSeed + seedRange; seed++) {
-      locations.push(getLocation(seed, almanac));
+      const location = getLocation(seed, almanac);
+      if (location < minLocation) {
+        minLocation = location;
+      }
     }
   }
 
-  return Math.min(...locations);
+  return minLocation;
 }
