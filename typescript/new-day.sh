@@ -23,15 +23,15 @@ cat <<EOL > "$year/$day/solution.ts"
 
 
 // Challenge 1
-export function challenge1(input: Array<string>) {
+export function challenge1(input: Array<string>): number {
 
-  return;
+  return 0;
 }
 
 
 // Challenge 2
-export function challenge2(input: Array<string>) {
+export function challenge2(input: Array<string>): number {
 
-  return;
+  return 0;
 }
 EOL
