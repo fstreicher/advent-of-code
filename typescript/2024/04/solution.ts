@@ -1,5 +1,10 @@
 // https://adventofcode.com/2024/day/04
 
+/**
+ * @param word word to search for
+ * @param matrix the matrix of letters to search in
+ * @returns the number of times the word appears in the matrix
+ */
 function findWord(word: string, matrix: Array<string>): number {
   const [rows, cols] = [matrix.length, matrix[0].length];
   const wordLength = word.length;
@@ -126,6 +131,10 @@ function findWord(word: string, matrix: Array<string>): number {
   return count;
 }
 
+/**
+ * @param matrix the matrix of letters to search in
+ * @returns the number of times the word XMAS appears in the matrix in the shape of a X
+ */
 function findXMas(matrix: Array<string>): number {
   const [rows, cols] = [matrix.length, matrix[0].length];
   let count = 0;
